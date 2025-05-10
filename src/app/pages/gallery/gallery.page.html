@@ -1,0 +1,23 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Galería</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-list *ngIf="imagenes$ | async as imagenes">
+    <ion-item *ngFor="let img of imagenes" class="gallery-item">
+      <ion-thumbnail slot="start">
+        <img [src]="img.image" alt="Imagen" class="gallery-image"/>
+      </ion-thumbnail>
+      <ion-label class="gallery-label">
+        <h2>{{ img.description }}</h2>
+        <p>{{ img.createdAt | date: 'medium' }}</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
+  <ion-text *ngIf="(imagenes$ | async)?.length === 0" class="no-images-message">
+    <p>No hay imágenes registradas.</p>
+  </ion-text>
+</ion-content>
